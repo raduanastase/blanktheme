@@ -5,6 +5,7 @@ function blanktheme_theme_support() {
     add_action('rest_api_init', 'register_rest_images');
 
 
+    // ADD FEATURED IMAGE FROM POST TO THE FIELD fimg_url in REST
     function register_rest_images()
     {
         register_rest_field(array('post'),
@@ -28,6 +29,7 @@ function blanktheme_theme_support() {
 
 
 
+    // ADD ALL ATTACHED IMAGES FROM POST TO THE FIELD all_images in REST
     function register_rest_all_images()
     {
         register_rest_field(array('post'),
