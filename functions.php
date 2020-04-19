@@ -45,7 +45,7 @@ function blanktheme_theme_support() {
     function get_images_from_post() {
         global $post;
         $id = intval( $post->ID );
-        $size = 'medium';
+        $size = 'large';
         $attachments = get_children( array(
             'post_parent' => $id,
             'post_status' => 'inherit',
