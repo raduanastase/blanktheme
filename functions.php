@@ -55,7 +55,13 @@ function blanktheme_theme_support() {
             'orderby' => 'menu_order'
         ) );
 
-        return $attachments;
+        $images = array();
+
+        foreach($attachments as $image) {
+            array_push($images, wp_get_attachment_image_url($image->ID, $size));
+        }
+
+        return $images;
     }
 }
 function blanktheme_post_thumbnails()
