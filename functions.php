@@ -148,6 +148,11 @@ function blanktheme_post_thumbnails()
     add_theme_support('post-thumbnails');
 }
 
+function add_cors_http_header(){
+    header("Access-Control-Allow-Origin: *");
+}
+add_action('init','add_cors_http_header');
+
 add_action('after_setup_theme', 'blanktheme_post_thumbnails');
 
 add_action( 'after_setup_theme', 'blanktheme_theme_support' );
