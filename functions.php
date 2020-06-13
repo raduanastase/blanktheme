@@ -148,10 +148,22 @@ function blanktheme_post_thumbnails()
     add_theme_support('post-thumbnails');
 }
 
-function add_cors_http_header(){
+/*function add_cors_http_header(){
     header("Access-Control-Allow-Origin: *");
 }
-add_action('init','add_cors_http_header');
+add_action('init','add_cors_http_header');*/
+function add_custom_headers() {
+
+    add_filter( 'rest_pre_serve_request', function( $value ) {
+        header( 'Access-Control-Allow-Headers: Authorization, X-WP-Nonce,Content-Type, X-Requested-With');
+        header( 'Access-Control-Allow-Origin: *' );
+        header( 'Access-Control-Allow-Methods: GET' );
+        header( 'Access-Control-Allow-Credentials: true' );
+
+        return $value;
+    } );
+}
+add_action( 'rest_api_init', 'add_custom_headers', 15 );
 
 add_action('after_setup_theme', 'blanktheme_post_thumbnails');
 
