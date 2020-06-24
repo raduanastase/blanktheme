@@ -1,7 +1,33 @@
 <?php
 
 function blanktheme_theme_support() {
-    /* Vlad spera sa nu strice acest cod */
+   
+    /*Display  tag names*/ 
+   add_action('rest_api_init', 'register_rest_custom_tag_names');
+    function register_rest_custom_tag_names()
+    {  register_rest_field(array('post'),
+            'readable_tag_names',
+            array(
+                'get_callback' => 'get_custom_tag_names',
+                'update_callback' => null,
+                'schema' => null,
+            )
+        );
+    }
+   
+    function get_custom_tag_names() {
+        global $post;
+        $readable_tags=[]; 
+        $posttags = get_the_tags($post->ID);
+        if ($posttags) {
+        foreach($posttags as $tag) {
+        array_push($readable_tags,$tag->name);
+       }
+      }
+       return $readable_tags;
+    }
+        
+    /* Custom Rest API */
      add_action('rest_api_init', 'register_rest_all_images2');
      add_action('rest_api_init', 'register_rest_images2');
     
