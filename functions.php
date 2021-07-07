@@ -50,14 +50,21 @@ function blanktheme_theme_support() {
     {
         global $post;
         $id = intval( $post->ID );
-        if(has_post_thumbnail($id)){
-        $thum['thumbnail']=get_the_post_thumbnail_url( $id, 'thumbnail' );
-        $thum['medium']=get_the_post_thumbnail_url( $id, "medium" );
-        $thum['large']=get_the_post_thumbnail_url( $id, "large" );
-        $thum['medium_large']=get_the_post_thumbnail_url( $id, "medium_large" );
-        $thum['full']=get_the_post_thumbnail_url( $id, "full" );
-        return $thum;
+        if( has_post_thumbnail( $id ) ){
+            $thum['thumbnail'] = get_the_post_thumbnail_url( $id, 'thumbnail' );
+            $thum['medium'] = get_the_post_thumbnail_url( $id, "medium" );
+            $thum['large'] = get_the_post_thumbnail_url( $id, "large" );
+            $thum['medium_large'] = get_the_post_thumbnail_url( $id, "medium_large" );
+            $thum['full'] = get_the_post_thumbnail_url( $id, "full" );
+            return $thum;
         }
+        else{
+		      $custom_thumbnail = get_post_meta( $id, 'custom_thumbnail', true );
+			   if ( $custom_thumbnail != "" ){
+				   $thum['thumbnail'] = $thum['medium'] = $thumb['large'] = $thum['medium_large'] = $thum['full'] = $custom_thumbnail;
+				   return $thum;
+			   }
+	     }
      return false; 
     }
     // ALL IMG CALL
